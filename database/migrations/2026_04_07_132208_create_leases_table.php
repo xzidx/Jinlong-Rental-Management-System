@@ -11,8 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('leases', function (Blueprint $table) {
+       Schema::create('leases', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('unit_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('tenant_id')->constrained()->cascadeOnDelete();
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->decimal('monthly_rent', 10, 2);
+            $table->decimal('security_deposit', 10, 2);
+            $table->enum('status', ['active', 'ended']);
+            $table->date('renewal_date')->nullable();
+            $table->integer('renewal_count')->default(0);
+            $table->text('terms_conditions')->nullable();
             $table->timestamps();
         });
     }

@@ -11,11 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('properties', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+       Schema::create('properties', function (Blueprint $table) {
+        $table->id();
+        $table->string('name');
+        $table->string('address');
+        $table->string('city');
+        $table->string('district');
+        $table->string('type');
+        $table->integer('total_units')->default(0);
+        $table->year('construction_year')->nullable();
+        $table->text('description')->nullable();
+        $table->boolean('is_active')->default(true);
+        $table->timestamps();
+    });
+        }
 
     /**
      * Reverse the migrations.

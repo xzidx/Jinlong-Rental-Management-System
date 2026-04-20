@@ -7,59 +7,37 @@ use Illuminate\Http\Request;
 
 class TenantController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return Tenant::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'first_name' => 'required',
+            'email' => 'required|email|unique:tenants,email',
+        ]);
+
+        return Tenant::create($data);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Tenant $tenant)
+    public function show($id)
     {
-        //
+        return Tenant::with('leases')->findOrFail($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Tenant $tenant)
+    public function update(Request $request, $id)
     {
-        //
+        $tenant = Tenant::findOrFail($id);
+        $tenant->update($request->all());
+
+        return $tenant;
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Tenant $tenant)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Tenant $tenant)
-    {
-        //
+        Tenant::destroy($id);
+        return response()->json(['message' => 'Deleted']);
     }
 }

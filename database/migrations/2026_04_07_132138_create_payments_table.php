@@ -11,10 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payments', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+       Schema::create('payments', function (Blueprint $table) {
+    $table->id();
+    $table->foreignId('lease_id')->constrained()->cascadeOnDelete();
+    $table->string('payment_method');
+    $table->decimal('amount', 10, 2);
+    $table->date('payment_date');
+    $table->date('due_date');
+    $table->enum('status', ['paid', 'pending']);
+    $table->string('transaction_reference')->nullable();
+    $table->text('notes')->nullable();
+    $table->timestamps();
+});
     }
 
     /**

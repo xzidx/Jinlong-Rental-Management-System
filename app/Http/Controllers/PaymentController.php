@@ -7,59 +7,38 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return Payment::with('lease')->get();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'lease_id' => 'required|exists:leases,id',
+            'amount' => 'required|numeric',
+            'payment_date' => 'required|date',
+        ]);
+
+        return Payment::create($data);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Payment $payment)
+    public function show($id)
     {
-        //
+        return Payment::with('lease')->findOrFail($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Payment $payment)
+    public function update(Request $request, $id)
     {
-        //
+        $payment = Payment::findOrFail($id);
+        $payment->update($request->all());
+
+        return $payment;
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Payment $payment)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Payment $payment)
-    {
-        //
+        Payment::destroy($id);
+        return response()->json(['message' => 'Deleted']);
     }
 }

@@ -1,31 +1,11 @@
 <?php
+
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\LeaseController;
 use App\Http\Controllers\PaymentController;
-use Illuminate\Support\Facades\Route;
-use Illuminate\View\View;
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-Route::get('/hello',function() {
-     return view('hello');
-});
-
-Route::get('/contect',function() {
-    return view('contect');
-});
-
-Route::get('/property',function() {
-    return view('Property.index');
-});
-
-Route::get('/nano', [LeaseController::class, 'index']);
-
 
 Route::apiResource('properties', PropertyController::class);
 Route::apiResource('units', UnitController::class);

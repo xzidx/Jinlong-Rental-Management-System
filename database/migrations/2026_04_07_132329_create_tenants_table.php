@@ -11,10 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tenants', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+      Schema::create('tenants', function (Blueprint $table) {
+        $table->id();
+        $table->string('first_name');
+        $table->string('last_name');
+        $table->string('email')->unique();
+        $table->string('phone');
+        $table->string('id_card_number');
+        $table->string('emergency_contact_name')->nullable();
+        $table->string('emergency_contact_phone')->nullable();
+        $table->text('address')->nullable();
+        $table->boolean('is_active')->default(true);
+        $table->timestamps();
+    });
     }
 
     /**

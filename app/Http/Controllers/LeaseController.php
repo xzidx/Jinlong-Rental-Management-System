@@ -7,59 +7,39 @@ use Illuminate\Http\Request;
 
 class LeaseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return Lease::with(['unit','tenant','payments'])->get();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'unit_id' => 'required|exists:units,id',
+            'tenant_id' => 'required|exists:tenants,id',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+        ]);
+
+        return Lease::create($data);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Lease $lease)
+    public function show($id)
     {
-        //
+        return Lease::with(['unit','tenant','payments'])->findOrFail($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Lease $lease)
+    public function update(Request $request, $id)
     {
-        //
+        $lease = Lease::findOrFail($id);
+        $lease->update($request->all());
+
+        return $lease;
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Lease $lease)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Lease $lease)
-    {
-        //
+        Lease::destroy($id);
+        return response()->json(['message' => 'Deleted']);
     }
 }

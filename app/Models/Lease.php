@@ -6,5 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lease extends Model
 {
-    //
+    protected $fillable = [
+        'unit_id','tenant_id','start_date','end_date',
+        'monthly_rent','security_deposit','status',
+        'renewal_date','renewal_count','terms_conditions'
+    ];
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

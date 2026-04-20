@@ -7,59 +7,38 @@ use Illuminate\Http\Request;
 
 class UnitController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return Unit::with('property')->get();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'property_id' => 'required|exists:properties,id',
+            'unit_number' => 'required',
+            'monthly_rent' => 'required|numeric',
+        ]);
+
+        return Unit::create($data);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Unit $unit)
+    public function show($id)
     {
-        //
+        return Unit::with(['property','leases'])->findOrFail($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Unit $unit)
+    public function update(Request $request, $id)
     {
-        //
+        $unit = Unit::findOrFail($id);
+        $unit->update($request->all());
+
+        return $unit;
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Unit $unit)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Unit $unit)
-    {
-        //
+        Unit::destroy($id);
+        return response()->json(['message' => 'Deleted']);
     }
 }

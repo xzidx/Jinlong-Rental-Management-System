@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
 {
-    //
+    protected $fillable = [
+        'lease_id','payment_method','amount','payment_date',
+        'due_date','status','transaction_reference','notes'
+    ];
+
+    public function lease()
+    {
+        return $this->belongsTo(Lease::class);
+    }
 }

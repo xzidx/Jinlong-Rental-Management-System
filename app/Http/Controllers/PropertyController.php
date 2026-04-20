@@ -7,59 +7,42 @@ use Illuminate\Http\Request;
 
 class PropertyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        // show all properties with units
+        return Property::with('units')->get();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'district' => 'required',
+            'type' => 'required',
+        ]);
+
+        return Property::create($data);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Property $property)
+    public function show($id)
     {
-        //
+        return Property::with('units')->findOrFail($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Property $property)
+    public function update(Request $request, $id)
     {
-        //
+        $property = Property::findOrFail($id);
+        $property->update($request->all());
+
+        return $property;
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Property $property)
+    public function destroy($id)
     {
-        //
-    }
+        Property::destroy($id);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Property $property)
-    {
-        //
+        return response()->json(['message' => 'Deleted']);
     }
 }
