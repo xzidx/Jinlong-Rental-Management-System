@@ -2,47 +2,61 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Property;
+use App\Models\property;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
 {
     public function index()
     {
-        // show all properties with units
-        return Property::with('units')->get();
+        return view('Property.index');
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'district' => 'required',
-            'type' => 'required',
-        ]);
-
-        return Property::create($data);
+        //
     }
 
-    public function show($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(property $property)
     {
-        return Property::with('units')->findOrFail($id);
+        //
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(property $property)
     {
-        $property = Property::findOrFail($id);
-        $property->update($request->all());
-
-        return $property;
+        //
     }
 
-    public function destroy($id)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, property $property)
     {
-        Property::destroy($id);
+        //
+    }
 
-        return response()->json(['message' => 'Deleted']);
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(property $property)
+    {
+        //
     }
 }

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MaintenanceRequest extends Model
+class property extends Model
 {
     //
 }

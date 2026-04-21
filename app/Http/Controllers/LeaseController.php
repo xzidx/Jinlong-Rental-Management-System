@@ -2,44 +2,61 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Lease;
+use App\Models\lease;
 use Illuminate\Http\Request;
 
 class LeaseController extends Controller
 {
     public function index()
     {
-        return Lease::with(['unit','tenant','payments'])->get();
+       return view('Lease.index');    
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'unit_id' => 'required|exists:units,id',
-            'tenant_id' => 'required|exists:tenants,id',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
-        ]);
-
-        return Lease::create($data);
+        //
     }
 
-    public function show($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(lease $lease)
     {
-        return Lease::with(['unit','tenant','payments'])->findOrFail($id);
+        //
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(lease $lease)
     {
-        $lease = Lease::findOrFail($id);
-        $lease->update($request->all());
-
-        return $lease;
+        //
     }
 
-    public function destroy($id)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, lease $lease)
     {
-        Lease::destroy($id);
-        return response()->json(['message' => 'Deleted']);
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(lease $lease)
+    {
+        //
     }
 }

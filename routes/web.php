@@ -1,9 +1,6 @@
 <?php
-use App\Http\Controllers\PropertyController;
-use App\Http\Controllers\UnitController;
-use App\Http\Controllers\TenantController;
 use App\Http\Controllers\LeaseController;
-use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
 
@@ -12,23 +9,17 @@ Route::get('/', function () {
 });
 
 
-Route::get('/hello',function() {
-     return view('hello');
-});
 
-Route::get('/contect',function() {
-    return view('contect');
-});
+
 
 Route::get('/property',function() {
     return view('Property.index');
 });
 
-Route::get('/nano', [LeaseController::class, 'index']);
+Route::get('/lease', [LeaseController::class, 'index']);
 
 
-Route::apiResource('properties', PropertyController::class);
-Route::apiResource('units', UnitController::class);
-Route::apiResource('tenants', TenantController::class);
-Route::apiResource('leases', LeaseController::class);
-Route::apiResource('payments', PaymentController::class);
+// Route::get('/property', [PropertyController::class, 'index']);
+
+
+Route::post('/property', [PropertyController::class, 'index']);
