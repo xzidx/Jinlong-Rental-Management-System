@@ -2,7 +2,7 @@
  @vite(['resources/css/app.css', 'resources/js/app.js'])
 
  
-<aside class="fixed inset-y-0 left-0 w-64 bg-primary-blue text-slate-400 flex flex-col shadow-2xl z-50">
+<aside class="fixed inset-y-0 left-0 w-64 bg-primary-bg text-slate-400 flex flex-col shadow-2xl z-50">
     
     <div class="h-20 flex items-center px-6 gap-3 border-b border-slate-800/50">
         <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-500/20">

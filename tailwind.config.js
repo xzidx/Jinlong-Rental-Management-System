@@ -18,10 +18,12 @@ export default {
 
             colors: {
                 /* PRIMARY */
-                'primary-blue': '#2563EB',
+                'primary-bg': '#ffffff',
                 'primary-blue-light': '#3B82F6',
                 'primary-blue-dark': '#1E3A8A',
                 'primary-blue-hover': '#1D4ED8',
+                'primary-black': '#000000',
+
 
                 /* BASIC */
                 white: '#FFFFFF',
