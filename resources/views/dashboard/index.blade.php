@@ -13,7 +13,7 @@
 
     <main class="ml-64 min-h-screen flex flex-col">
         
-        <header class="h-20 bg-white border-b border-slate-200 px-8 flex items-center justify-between sticky top-0 z-40">
+        <header class="h-20 bg-primary-bg border-b border-slate-200 px-8 flex items-center justify-between sticky top-0 z-40">
             <div>
                 <h1 class="text-xl font-bold text-slate-800">Project Overview</h1>
                 <p class="text-xs text-slate-500">Welcome back, check your latest updates.</p>

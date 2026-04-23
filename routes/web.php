@@ -13,4 +13,5 @@ Route::get('/dashboard', function () {
 
 Route::get('/rent', [RentController::class, 'index']);
 
+
 Route::post('/rent', [RentController::class, 'store'])->name('rent.store');
