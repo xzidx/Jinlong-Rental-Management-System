@@ -12,7 +12,7 @@ class RevenueReportController extends Controller
      */
     public function index()
     {
-        //
+        return view ('revenue_report.index');
     }
 
     /**

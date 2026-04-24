@@ -12,7 +12,7 @@ class MaintenanceReportController extends Controller
      */
     public function index()
     {
-        //
+        return view('maintenance_report.index');
     }
 
     /**

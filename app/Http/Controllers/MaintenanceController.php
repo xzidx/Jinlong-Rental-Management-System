@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\miantenance;
+use App\Models\maintenance;
 use Illuminate\Http\Request;
 
-class MiantenanceController extends Controller
+class MaintenanceController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view ('maintenance.index');
     }
 
     /**

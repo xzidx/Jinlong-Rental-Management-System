@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class miantenance extends Model
+class maintenance extends Model
 {
     //
 }

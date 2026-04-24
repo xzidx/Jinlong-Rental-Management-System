@@ -12,7 +12,7 @@ class OccupancyReportController extends Controller
      */
     public function index()
     {
-        //
+        return view ('occupancy_report.index');
     }
 
     /**
