@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Lease extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'unit_id',
+        'tenant_id',
+        'start_date',
+        'end_date',
+        'monthly_rent',
+        'security_deposit',
+        'status',
+        'renewal_date',
+        'renewal_count',
+        'terms_conditions',
+    ];
+
+    protected $casts = [
+        'start_date' => 'date',
+        'end_date' => 'date',
+        'renewal_date' => 'date',
+    ];
+
+    // Relationships
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function maintenanceRequests()
+    {
+        return $this->hasMany(MaintenanceRequest::class);
+    }
+}
