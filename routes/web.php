@@ -41,6 +41,11 @@ Route::middleware(['auth'])->prefix('tenant')->group(function () {
     Route::get('/my-lease', function () { return view('tenant.my-lease'); })->name('tenant.my-lease');
     Route::get('/my-payments', function () { return view('tenant.my-payments'); })->name('tenant.my-payments');
     Route::get('/my-maintenance', function () { return view('tenant.my-maintenance'); })->name('tenant.my-maintenance');
+    Route::get('/properties', [App\Http\Controllers\Tenant\PropertyController::class, 'index'])->name('tenant.properties');
+    Route::get('/properties/{id}', [App\Http\Controllers\Tenant\PropertyController::class, 'show'])->name('tenant.property.show');
+    Route::get('/my-lease', [App\Http\Controllers\Tenant\LeaseController::class, 'show'])->name('tenant.my-lease');
+    Route::post('/request-lease/{unit}', [App\Http\Controllers\Tenant\LeaseController::class, 'request'])->name('tenant.request-lease');
+    Route::post('/request-lease/{unit}', [App\Http\Controllers\Tenant\LeaseController::class, 'request'])->name('tenant.request-lease');
 });
 
 // ========== PROFILE ROUTE ==========

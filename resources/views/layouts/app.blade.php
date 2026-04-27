@@ -71,23 +71,27 @@
                     <!-- TENANT MENU -->
                     <a href="/tenant/dashboard" class="flex items-center gap-3 px-4 py-3 rounded-lg transition-all group hover:bg-primary-blue-light hover:text-primary-bg">
                         <i class="fa-solid fa-house w-5"></i>
-                        <span class="font-medium text-sm">My Dashboard</span>
+                        <span class="font-medium text-sm">Dashboard</span>
+                    </a>
+                    <a href="/tenant/properties" class="flex items-center gap-3 px-4 py-3 rounded-lg transition-all group hover:bg-primary-blue-light hover:text-primary-bg">
+                         <i class="fa-solid fa-building w-5"></i>
+                        <span class="font-medium text-sm">Properties</span>
                     </a>
                     <a href="/tenant/my-unit" class="flex items-center gap-3 px-4 py-3 rounded-lg transition-all group hover:bg-primary-blue-light hover:text-primary-bg">
                         <i class="fa-solid fa-location-dot w-5"></i>
-                        <span class="font-medium text-sm">My Unit</span>
+                        <span class="font-medium text-sm">Unit</span>
                     </a>
                     <a href="/tenant/my-lease" class="flex items-center gap-3 px-4 py-3 rounded-lg transition-all group hover:bg-primary-blue-light hover:text-primary-bg">
                         <i class="fa-solid fa-file-signature w-5"></i>
-                        <span class="font-medium text-sm">My Lease</span>
+                        <span class="font-medium text-sm">Lease</span>
                     </a>
                     <a href="/tenant/my-payments" class="flex items-center gap-3 px-4 py-3 rounded-lg transition-all group hover:bg-primary-blue-light hover:text-primary-bg">
                         <i class="fa-solid fa-receipt w-5"></i>
-                        <span class="font-medium text-sm">My Payments</span>
+                        <span class="font-medium text-sm">Payments</span>
                     </a>
                     <a href="/tenant/my-maintenance" class="flex items-center gap-3 px-4 py-3 rounded-lg transition-all group hover:bg-primary-blue-light hover:text-primary-bg">
                         <i class="fa-solid fa-tools w-5"></i>
-                        <span class="font-medium text-sm">My Maintenance</span>
+                        <span class="font-medium text-sm">Maintenance</span>
                     </a>
                 @endif
             @endauth

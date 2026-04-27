@@ -41,13 +41,13 @@
                     <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
                     <input type="text" placeholder="Search users..." class="w-full pl-10 pr-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
-                <select class="border rounded-xl px-4 py-2 bg-white">
+                <select class="border rounded-xl px-8 py-2 bg-white">
                     <option>All Roles</option>
                     <option>Admin</option>
                     <option>Manager</option>
                     <option>Tenant</option>
                 </select>
-                <select class="border rounded-xl px-4 py-2 bg-white">
+                <select class="border rounded-xl px-8 py-2 bg-white">
                     <option>All Status</option>
                     <option>Active</option>
                     <option>Inactive</option>
