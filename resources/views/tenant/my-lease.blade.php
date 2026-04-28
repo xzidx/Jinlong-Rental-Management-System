@@ -60,11 +60,6 @@
             </div>
 
             <!-- Days Remaining -->
-            @php
-                $daysLeft = now()->diffInDays($lease->end_date, false);
-                $totalDays = now()->diffInDays($lease->start_date) + $daysLeft;
-                $progressPercent = $totalDays > 0 ? round((now()->diffInDays($lease->start_date) / $totalDays) * 100) : 0;
-            @endphp
             <div class="mt-5 pt-4 border-t">
                 <div class="flex justify-between text-sm mb-1">
                     <span class="text-gray-600">Lease Progress</span>

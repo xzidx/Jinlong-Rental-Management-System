@@ -24,24 +24,28 @@
                 </tr>
             </thead>
             <tbody class="divide-y">
-                @php
-                    $payments = [
-                        ['date' => '2026-04-01', 'unit' => '101', 'amount' => 1200, 'method' => 'Bank Transfer', 'status' => 'Paid'],
-                        ['date' => '2026-03-01', 'unit' => '101', 'amount' => 1200, 'method' => 'Bank Transfer', 'status' => 'Paid'],
-                        ['date' => '2026-02-01', 'unit' => '101', 'amount' => 1200, 'method' => 'Cash', 'status' => 'Paid'],
-                    ];
-                @endphp
-                @foreach($payments as $payment)
+                @forelse($payments as $payment)
                 <tr class="hover:bg-gray-50">
-                    <td class="p-3 text-sm">{{ $payment['date'] }}</td>
-                    <td class="p-3 text-sm">Unit {{ $payment['unit'] }}</td>
-                    <td class="p-3 text-sm font-medium">${{ number_format($payment['amount']) }}</td>
-                    <td class="p-3 text-sm">{{ $payment['method'] }}</td>
+                    <td class="p-3 text-sm">{{ \Carbon\Carbon::parse($payment->payment_date)->format('Y-m-d') }}</td>
+                    <td class="p-3 text-sm">Unit {{ $payment->lease->unit->unit_number ?? 'N/A' }}</td>
+                    <td class="p-3 text-sm font-medium">${{ number_format($payment->amount) }}</td>
+                    <td class="p-3 text-sm">{{ ucfirst($payment->payment_method) }}</td>
                     <td class="p-3">
-                        <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">{{ $payment['status'] }}</span>
+                        @if($payment->status == 'paid')
+                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">Paid</span>
+                        @else
+                            <span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs">Pending</span>
+                        @endif
                     </td>
                 </tr>
-                @endforeach
+                @empty
+                <tr>
+                    <td colspan="5" class="p-8 text-center text-gray-400">
+                        <i class="fa-solid fa-receipt text-4xl mb-2 block"></i>
+                        No payment records found
+                    </td>
+                </tr>
+                @endforelse
             </tbody>
         </table>
     </div>

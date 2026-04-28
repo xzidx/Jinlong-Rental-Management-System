@@ -48,20 +48,33 @@
                    
                     
 
-                @elseif(Auth::user()->role == 'manager')
+               @elseif(Auth::user()->role == 'manager')
                     <!-- MANAGER MENU -->
                     <a href="/manager/dashboard" class="flex items-center gap-3 px-4 py-3 rounded-lg transition-all group hover:bg-primary-blue-light hover:text-primary-bg">
                         <i class="fa-solid fa-house w-5"></i>
-                        <span class="font-medium text-sm">Manager Dashboard</span>
+                        <span class="font-medium text-sm">Dashboard</span>
                     </a>
+                    
                     <a href="/manager/properties" class="flex items-center gap-3 px-4 py-3 rounded-lg transition-all group hover:bg-primary-blue-light hover:text-primary-bg">
                         <i class="fa-solid fa-building w-5"></i>
                         <span class="font-medium text-sm">Properties</span>
                     </a>
+                    
                     <a href="/manager/tenants" class="flex items-center gap-3 px-4 py-3 rounded-lg transition-all group hover:bg-primary-blue-light hover:text-primary-bg">
                         <i class="fa-solid fa-users w-5"></i>
                         <span class="font-medium text-sm">Tenants</span>
                     </a>
+                    
+                    <!-- NEW: Lease Requests Link with Badge -->
+                    <a href="/manager/requests" class="flex items-center gap-3 px-4 py-3 rounded-lg transition-all group hover:bg-primary-blue-light hover:text-primary-bg">
+                        <i class="fa-solid fa-clipboard-list w-5"></i>
+                        <span class="font-medium text-sm">Lease Requests</span>
+                        @php $pendingCount = \App\Models\Lease::where('status', 'pending')->count(); @endphp
+                        @if($pendingCount > 0)
+                            <span class="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full ml-auto">{{ $pendingCount }}</span>
+                        @endif
+                    </a>
+                    
                     <a href="/manager/reports" class="flex items-center gap-3 px-4 py-3 rounded-lg transition-all group hover:bg-primary-blue-light hover:text-primary-bg">
                         <i class="fa-solid fa-chart-line w-5"></i>
                         <span class="font-medium text-sm">Reports</span>

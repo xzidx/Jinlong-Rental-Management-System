@@ -4,22 +4,27 @@ namespace App\Http\Controllers\Tenant;
 
 use App\Http\Controllers\Controller;
 use App\Models\Property;
-use Illuminate\Http\Request;
 
 class PropertyController extends Controller
 {
     public function index()
     {
-        $properties = Property::with(['units' => function($query) {
-            $query->where('status', 'available');
-        }])->get();
+        $properties = Property::all();
         
-        return view('tenant.properties.index', compact('properties'));
+        return view('tenant.properties.index', [
+            'properties' => $properties
+        ]);
     }
     
     public function show($id)
     {
         $property = Property::with('units')->findOrFail($id);
-        return view('tenant.properties.show', compact('property'));
+        
+        $availableCount = $property->units->where('status', 'available')->count();
+        
+        return view('tenant.properties.show', [
+            'property' => $property,
+            'availableCount' => $availableCount
+        ]);
     }
 }

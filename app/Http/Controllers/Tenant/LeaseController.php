@@ -27,7 +27,23 @@ class LeaseController extends Controller
             ->with('unit.property')
             ->first();
         
-        return view('tenant.my-lease', compact('lease'));
+        // Calculate days remaining and progress
+        $daysLeft = 0;
+        $progressPercent = 0;
+        
+        if ($lease) {
+            $daysLeft = now()->diffInDays($lease->end_date, false);
+            if ($daysLeft < 0) $daysLeft = 0;
+            
+            $totalDays = now()->diffInDays($lease->start_date) + $daysLeft;
+            $progressPercent = $totalDays > 0 ? round((now()->diffInDays($lease->start_date) / $totalDays) * 100) : 0;
+        }
+        
+        return view('tenant.my-lease', [
+            'lease' => $lease,
+            'daysLeft' => $daysLeft,
+            'progressPercent' => $progressPercent
+        ]);
     }
     
     public function request(Request $request, $unitId)
@@ -64,7 +80,7 @@ class LeaseController extends Controller
             'end_date' => now()->addYear(),
             'monthly_rent' => $unit->monthly_rent,
             'security_deposit' => $unit->security_deposit ?? 0,
-            'status' => 'active',  // Set to active directly for testing
+            'status' => 'active',
             'terms_conditions' => $request->notes ?? 'Rent request via website',
         ]);
         
